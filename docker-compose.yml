@@ -1,0 +1,31 @@
+version: '3'
+services:
+    web:
+        image: grafana/grafana
+        hostname: grafana1
+        container_name: grafana1
+        restart: always
+        ports:
+            - "3001:3000"
+        networks:
+            frontapp:
+                ipv4_address: 172.25.0.11
+    db:
+        image: influxdb
+        hostname: influx1
+        container_name: influx1
+        restart: always
+        ports:
+            - "8086:8086"
+        networks:
+            frontapp:
+                ipv4_address: 172.25.0.12
+        env_file:
+           - db-var.env
+networks:
+  frontapp:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.0.0/16
