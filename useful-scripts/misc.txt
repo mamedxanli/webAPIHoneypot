@@ -1,2 +1,0 @@
-# To remove a log group from CloudWatch
-aws logs describe-log-streams --log-group-name API-Gateway-Execution-Logs_h6da3w6ume/production --output text | awk '{print $7}' | while read x; do aws logs delete-log-stream --log-group-name API-Gateway-Execution-Logs_h6da3w6ume/production --log-stream-name $x ; done
