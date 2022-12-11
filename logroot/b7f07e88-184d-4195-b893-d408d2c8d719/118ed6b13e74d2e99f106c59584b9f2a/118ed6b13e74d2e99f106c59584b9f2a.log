@@ -1,0 +1,24 @@
+2022-11-28T21:48:18.018Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Extended Request Id: cVPpWEIUIAMF_BQ=
+2022-11-28T21:48:18.018Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Verifying Usage Plan for request: c2b5c767-1a79-4719-9a60-8c403bd62a69. API Key:  API Stage: h6da3w6ume/production
+2022-11-28T21:48:18.020Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) API Key  authorized because method 'GET /chargers' does not require API Key. Request will not contribute to throttle or quota limits
+2022-11-28T21:48:18.020Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Usage Plan check succeeded for API Key  and API Stage h6da3w6ume/production
+2022-11-28T21:48:18.021Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Starting execution for request: c2b5c767-1a79-4719-9a60-8c403bd62a69
+2022-11-28T21:48:18.021Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) HTTP Method: GET, Resource Path: /chargers/
+2022-11-28T21:48:18.021Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Method request path: {}
+2022-11-28T21:48:18.021Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Method request query string: {id=1}
+2022-11-28T21:48:18.021Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Method request headers: {sec-fetch-mode=navigate, sec-fetch-site=none, accept-language=en-US,en;q=0.5, User-Agent=Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:107.0) Gecko/20100101 Firefox/107.0, X-Forwarded-Proto=https, Host=api.elbrusgroup.net, sec-fetch-user=?1, X-Forwarded-Port=443, X-Amzn-Trace-Id=Root=1-63852ca2-3e127c4e43707cb9396da69e, accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8, upgrade-insecure-requests=1, X-Forwarded-For=185.78.69.118, accept-encoding=gzip, deflate, br, sec-fetch-dest=document}
+2022-11-28T21:48:18.021Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Method request body before transformations: 
+2022-11-28T21:48:18.021Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Endpoint request URI: https://lambda.us-east-1.amazonaws.com/2015-03-31/functions/arn:aws:lambda:us-east-1:391035843039:function:ChargingNetworkGetLF/invocations
+2022-11-28T21:48:18.021Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Endpoint request headers: {X-Amz-Date=20221128T214818Z, x-amzn-apigateway-api-id=h6da3w6ume, Accept=application/json, User-Agent=AmazonAPIGateway_h6da3w6ume, Host=lambda.us-east-1.amazonaws.com, X-Amz-Content-Sha256=9f6ff083bcc20d419bdcb7ba1d2f05d7fb69ec38d7394a16b8d5798cc22236f8, X-Amzn-Trace-Id=Root=1-63852ca2-3e127c4e43707cb9396da69e, x-amzn-lambda-integration-tag=c2b5c767-1a79-4719-9a60-8c403bd62a69, Authorization=*********************************************************************************************************************************************************************************************************************************************************************************************************************************************fe8e1d, X-Amz-Source-Arn=arn:aws:execute-api:us-east-1:391035843039:h6da3w6ume/production/GET/chargers, X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDUaCXVzLWVhc3QtMSJHMEUCIQCkh28OZsOtZoKqe0oj/blG92ytvaruumq4jfW0Ulb5EwIgVFACdu3DMuoMWEzXQ3eP5Q+LRwbDNmGU93PmX1VDeAYqzAQIThAAGgwz [TRUNCATED]
+2022-11-28T21:48:18.021Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Endpoint request body after transformations: {
+  "id":  "1"
+}
+2022-11-28T21:48:18.021Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Sending request to https://lambda.us-east-1.amazonaws.com/2015-03-31/functions/arn:aws:lambda:us-east-1:391035843039:function:ChargingNetworkGetLF/invocations
+2022-11-28T21:48:18.043Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Received response. Status: 200, Integration latency: 22 ms
+2022-11-28T21:48:18.043Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Endpoint response headers: {Date=Mon, 28 Nov 2022 21:48:18 GMT, Content-Type=application/json, Content-Length=104, Connection=keep-alive, x-amzn-RequestId=7e003d46-98da-4a6c-919d-43aec40e2383, x-amzn-Remapped-Content-Length=0, X-Amz-Executed-Version=$LATEST, X-Amzn-Trace-Id=root=1-63852ca2-3e127c4e43707cb9396da69e;sampled=0}
+2022-11-28T21:48:18.043Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Endpoint response body before transformations: {"statusCode": 200, "body": "\"\\\"errorMessage\\\": \\\"One or more parameter values are not valid!\""}
+2022-11-28T21:48:18.043Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Method response body after transformations: {"statusCode": 200, "body": "\"\\\"errorMessage\\\": \\\"One or more parameter values are not valid!\""}
+2022-11-28T21:48:18.043Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Method response headers: {X-Amzn-Trace-Id=Root=1-63852ca2-3e127c4e43707cb9396da69e;Sampled=0, Content-Type=application/json}
+2022-11-28T21:48:18.043Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Successfully completed execution
+2022-11-28T21:48:18.043Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) Method completed with status: 200
+2022-11-28T21:48:18.043Z (c2b5c767-1a79-4719-9a60-8c403bd62a69) AWS Integration Endpoint RequestId : 7e003d46-98da-4a6c-919d-43aec40e2383

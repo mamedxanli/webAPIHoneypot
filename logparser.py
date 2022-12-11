@@ -3,7 +3,7 @@
 import sys, os, glob, json, subprocess, gzip, time, logging
 from influxdb import client as influxdb
 
-db_json_file = '~/workspace/api_honeypot/db.json'
+db_json_file = 'db.json'
 
 delete_body_key = "Endpoint request body after transformations: "
 request_id_key = "Extended Request Id: "
@@ -16,7 +16,8 @@ delete_status_key = "Method completed with status: "
 get_put_body_key = "Method request query string: "
 all_lines_processed = list()
 
-logroot = '~/workspace/api_honeypot/logroot'
+logroot = './logroot'
+#logroot = '~/workspace/api_honeypot/logroot'
 #log_export_start = str(round(time.time() * 1000) - 300000)
 #log_export_stop = str(round(time.time() * 1000))
 #subprocess.run(['aws', 'logs', 'create-export-task', '--task-name', 'export-to-s3-task', '--log-group-name', 'API-Gateway-Execution-Logs_h6da3w6ume/production', '--from', log_export_start, '--to', log_export_stop, '--destination', 'api-honeypot-logs'])
@@ -156,9 +157,7 @@ def main(logroot):
         log_export_start = str(round(time.time() * 1000) - 300000)
         log_export_stop = str(round(time.time() * 1000))
         task_id = subprocess.check_output(['aws logs create-export-task --task-name export-to-s3-task --log-group-name API-Gateway-Execution-Logs_h6da3w6ume/production --from {0} --to {1} --destination api-honeypot-logs'.format(log_export_start, log_export_stop)], shell=True)
-        print(task_id, type(task_id))
         cloudwatch_export_task_id = str(json.loads(task_id.decode('utf-8'))['taskId'])
-        print(cloudwatch_export_task_id, type(cloudwatch_export_task_id))
         subprocess.run(['aws', 's3', 'sync', 's3://api-honeypot-logs/exportedlogs/', logroot])
         try:
             file_reader(logroot)
