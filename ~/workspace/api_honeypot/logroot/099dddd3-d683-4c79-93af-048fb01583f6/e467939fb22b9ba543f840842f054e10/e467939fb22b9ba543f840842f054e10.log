@@ -1,0 +1,31 @@
+2022-11-28T21:49:56.933Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Extended Request Id: cVP4zHl-IAMFWYQ=
+2022-11-28T21:49:56.933Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Verifying Usage Plan for request: 290dce51-07a2-407c-a6bf-a4c2e433e2da. API Key:  API Stage: h6da3w6ume/production
+2022-11-28T21:49:56.935Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) API Key  authorized because method 'PUT /chargers' does not require API Key. Request will not contribute to throttle or quota limits
+2022-11-28T21:49:56.935Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Usage Plan check succeeded for API Key  and API Stage h6da3w6ume/production
+2022-11-28T21:49:56.935Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Starting execution for request: 290dce51-07a2-407c-a6bf-a4c2e433e2da
+2022-11-28T21:49:56.935Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) HTTP Method: PUT, Resource Path: /chargers
+2022-11-28T21:49:56.935Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Method request path: {}
+2022-11-28T21:49:56.935Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Method request query string: {City=Korsa, Model=c12a, Output=22, PostCode=19021, SN=MD129F637H, Street=Korsveien 3, id=3}
+2022-11-28T21:49:56.935Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Method request headers: {Accept=*/*, User-Agent=python-requests/2.22.0, X-Forwarded-Proto=https, X-Forwarded-For=185.78.69.118, Host=api.elbrusgroup.net, Accept-Encoding=gzip, deflate, X-Forwarded-Port=443, X-Amzn-Trace-Id=Root=1-63852d04-10c9f5384cc741d6220e1787}
+2022-11-28T21:49:56.935Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Method request body before transformations: 
+2022-11-28T21:49:56.935Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Endpoint request URI: https://lambda.us-east-1.amazonaws.com/2015-03-31/functions/arn:aws:lambda:us-east-1:391035843039:function:ChargingNetworkPutLF/invocations
+2022-11-28T21:49:56.935Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Endpoint request headers: {X-Amz-Date=20221128T214956Z, x-amzn-apigateway-api-id=h6da3w6ume, Accept=application/json, User-Agent=AmazonAPIGateway_h6da3w6ume, Host=lambda.us-east-1.amazonaws.com, X-Amz-Content-Sha256=cba54886ff4832d27b095ebd46bc9b14199aadc6fc11568925a62b93b0e73e68, X-Amzn-Trace-Id=Root=1-63852d04-10c9f5384cc741d6220e1787, x-amzn-lambda-integration-tag=290dce51-07a2-407c-a6bf-a4c2e433e2da, Authorization=*********************************************************************************************************************************************************************************************************************************************************************************************************************************************f47889, X-Amz-Source-Arn=arn:aws:execute-api:us-east-1:391035843039:h6da3w6ume/production/PUT/chargers, X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDUaCXVzLWVhc3QtMSJHMEUCIQDR9wzuDQHZ//IxhGD2KfBYBFuryVQ2jxXifive4QaZBQIgC/BnujqigbCMF1fl0qbFRK9r2s24FRtPy31SvFl0Q5wqzAQIThAAGgwz [TRUNCATED]
+2022-11-28T21:49:56.935Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Endpoint request body after transformations: {
+"id":  "3",
+"City":  "Korsa",
+"Model":  "c12a",
+"Street":  "Korsveien 3",
+"SN":  "MD129F637H",
+"Output":  "22",
+"PostCode": "19021"
+}
+
+2022-11-28T21:49:56.935Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Sending request to https://lambda.us-east-1.amazonaws.com/2015-03-31/functions/arn:aws:lambda:us-east-1:391035843039:function:ChargingNetworkPutLF/invocations
+2022-11-28T21:49:56.954Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Received response. Status: 200, Integration latency: 19 ms
+2022-11-28T21:49:56.954Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Endpoint response headers: {Date=Mon, 28 Nov 2022 21:49:56 GMT, Content-Type=application/json, Content-Length=104, Connection=keep-alive, x-amzn-RequestId=d2c79138-5e87-4c69-ba9c-00da8b21d957, x-amzn-Remapped-Content-Length=0, X-Amz-Executed-Version=$LATEST, X-Amzn-Trace-Id=root=1-63852d04-10c9f5384cc741d6220e1787;sampled=0}
+2022-11-28T21:49:56.954Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Endpoint response body before transformations: {"statusCode": 200, "body": "\"\\\"errorMessage\\\": \\\"One or more parameter values are not valid!\""}
+2022-11-28T21:49:56.954Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Method response body after transformations: {"statusCode": 200, "body": "\"\\\"errorMessage\\\": \\\"One or more parameter values are not valid!\""}
+2022-11-28T21:49:56.954Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Method response headers: {X-Amzn-Trace-Id=Root=1-63852d04-10c9f5384cc741d6220e1787;Sampled=0, Content-Type=application/json}
+2022-11-28T21:49:56.954Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Successfully completed execution
+2022-11-28T21:49:56.954Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) Method completed with status: 200
+2022-11-28T21:49:56.954Z (290dce51-07a2-407c-a6bf-a4c2e433e2da) AWS Integration Endpoint RequestId : d2c79138-5e87-4c69-ba9c-00da8b21d957

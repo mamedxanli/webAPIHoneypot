@@ -11,7 +11,7 @@ services:
             frontapp:
                 ipv4_address: 172.25.0.11
     db:
-        image: influxdb
+        image: influxdb:1.8.4
         hostname: influx1
         container_name: influx1
         restart: always
