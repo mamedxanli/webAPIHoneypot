@@ -305,7 +305,7 @@ aws apigateway update-stage --rest-api-id $rest_api_id \
 sleep 5
 
 echo "start Docker containers Grafana and Influx"
-docker-compose docker-compose.yml up -d
+docker-compose -f docker-compose.yml up -d
 sleep 5
 
 echo "Creating S3 bucket for log export"
