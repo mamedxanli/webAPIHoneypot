@@ -19,7 +19,7 @@ Create a separate AWS account for this experiment and make sure you do not have 
 
 The following line exports credentials, making them avaiable for shell script, thus avoiding typing in region, aws_access_key_id, aws_secret_access_key in every command. '
 
-export AWS_PROFILE=ntnu
+export AWS_PROFILE=default
 
 resource_name=chargers
 echo "Setting API resource name: " $resource_name
