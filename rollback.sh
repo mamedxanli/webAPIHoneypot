@@ -1,8 +1,9 @@
 #!/bin/bash
-export AWS_PROFILE=ntnu
+export AWS_PROFILE=default
 
 account_id=391035843039
 region=us-east-1
+rest_api_id=qfl4lynj51
 
 # Remove DynamoDB table
 aws dynamodb delete-table --table-name cnTable
@@ -13,10 +14,17 @@ aws lambda delete-function --function-name cnPutFunction
 aws lambda delete-function --function-name cnDeleteFunction
 
 # Remove API, replace some_api_id with id of your API
-aws apigateway delete-rest-api --rest-api-id phxr5z5mtk
+aws apigateway delete-rest-api --rest-api-id $rest_api_id
 
 # Remove IAM policies and roles
 aws iam delete-role-policy --role-name cnRole --policy-name cnPolicy
 aws iam detach-role-policy --role-name cnRole \
     --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 aws iam delete-role --role-name cnRole
+
+# Empty S3 bucket
+aws s3 rm s3://api-honeypot-logs --recursive
+# Remove S3 bucket
+aws s3api delete-bucket \
+    --bucket api-honeypot-logs \
+    --region us-east-1

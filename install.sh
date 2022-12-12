@@ -302,3 +302,20 @@ aws apigateway update-stage --rest-api-id $rest_api_id \
     --stage-name production \
     --region $region \
     --patch-operations op=replace,path=/*/*/logging/loglevel,value=info
+sleep 5
+
+echo "Creating S3 bucket for log export"
+aws s3api create-bucket \
+    --bucket api-honeypot-logs \
+    --region us-east-1
+
+echo "Assigning policy to S3 bucket to enable export from CLoudWatch"
+aws s3api put-bucket-policy --region us-east-1 \
+    --bucket api-honeypot-logs \
+    --policy file://aws_policies/s3-policy.json
+sleep 5
+
+echo "Enabling public access block to S3 bucket"
+aws s3api put-public-access-block --region us-east-1 \
+    --bucket api-honeypot-logs \
+    --public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
