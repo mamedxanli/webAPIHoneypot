@@ -108,7 +108,7 @@ echo "Creating API Gateway"
 rest_api_id=$(aws apigateway create-rest-api --region $region --name 'testAPI' | jq -r '.id')
 sleep 5
 parent_id=$(aws apigateway get-resources --region $region --rest-api-id $rest_api_id | jq -r '.items[].id')
-aws apigateway create-resource --rest-api-id $rest_api_id --parent-id $parent_id --path-part $resource_name
+aws apigateway create-resource --region $region --rest-api-id $rest_api_id --parent-id $parent_id --path-part $resource_name
 id_list=$(aws apigateway get-resources --region $region --rest-api-id $rest_api_id | jq -r '.items[] | .id')
 sleep 5
 
