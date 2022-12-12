@@ -8,6 +8,7 @@ log_group_name = 'API-Gateway-Execution-Logs_rd0cpvjm3l/production'
 db_name = 'honeypot'
 db_json_file = 'db.json'
 logroot = './logroot'
+region = 'us-east-1'
 
 delete_body_key = "Endpoint request body after transformations: "
 request_id_key = "Extended Request Id: "
@@ -156,7 +157,7 @@ def main(logroot):
     while True:
         log_export_start = str(round(time.time() * 1000) - 300000)
         log_export_stop = str(round(time.time() * 1000))
-        task_id = subprocess.check_output(['aws logs create-export-task --task-name export-to-s3-task --log-group-name {0} --from {1} --to {2} --destination api-honeypot-logs'.format(log_group_name, log_export_start, log_export_stop)], shell=True)
+        task_id = subprocess.check_output(['aws logs create-export-task --region {0} --task-name export-to-s3-task --log-group-name {1} --from {2} --to {3} --destination api-honeypot-logs'.format(region,log_group_name, log_export_start, log_export_stop)], shell=True)
         cloudwatch_export_task_id = str(json.loads(task_id.decode('utf-8'))['taskId'])
         subprocess.run(['aws', 's3', 'sync', s3bucket, logroot])
         try:
@@ -182,7 +183,7 @@ def main(logroot):
                 json.dump(all_lines_processed, dbfile)
             dbwriter(all_lines_processed)
             try:
-                subprocess.run(['aws', 'logs', 'cancel-export-task', '--task-id', cloudwatch_export_task_id])
+                subprocess.run(['aws', 'logs', 'cancel-export-task', '--region', region, '--task-id', cloudwatch_export_task_id])
             except Exception as ex:
                 logging.exception("There is no running export task. Error is: {}".format(ex))
         except Exception as ex:
