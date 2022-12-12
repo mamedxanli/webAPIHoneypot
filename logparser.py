@@ -3,7 +3,11 @@
 import sys, os, glob, json, subprocess, gzip, time, logging
 from influxdb import client as influxdb
 
+s3bucket = 's3://api-honeypot-logs/exportedlogs/'
+log_group_name = 'API-Gateway-Execution-Logs_rd0cpvjm3l/production'
+db_name = 'honeypot'
 db_json_file = 'db.json'
+logroot = './logroot'
 
 delete_body_key = "Endpoint request body after transformations: "
 request_id_key = "Extended Request Id: "
@@ -16,12 +20,6 @@ delete_status_key = "Method completed with status: "
 get_put_body_key = "Method request query string: "
 all_lines_processed = list()
 
-logroot = './logroot'
-#logroot = '~/workspace/api_honeypot/logroot'
-#log_export_start = str(round(time.time() * 1000) - 300000)
-#log_export_stop = str(round(time.time() * 1000))
-#subprocess.run(['aws', 'logs', 'create-export-task', '--task-name', 'export-to-s3-task', '--log-group-name', 'API-Gateway-Execution-Logs_h6da3w6ume/production', '--from', log_export_start, '--to', log_export_stop, '--destination', 'api-honeypot-logs'])
-#subprocess.run(['aws', 's3', 'sync', 's3://api-honeypot-logs/exportedlogs/', logroot])
 def file_reader(logroot):
     filename = str()
     try:
@@ -145,20 +143,22 @@ def build_data_structure(epoch: str, fields: dict = {}, tags: dict = {}, measure
         logging.exception("Exception while building influx tcp structure: {}".format(ex))
 
 def dbwriter(data):
-    db_connection = influxdb.InfluxDBClient('172.25.0.12', '8086', 'admin', 'admin123', 'honeypot')
+    db_connection = influxdb.InfluxDBClient('172.25.0.12', '8086', 'admin', 'admin123', db_name)
     try:
         db_connection.write_points(data)
     except Exception as ex:
         raise influxdb.InfluxDBClientError("Exception while writing to db: {}".format(ex))
+        raise SystemExit()
+
 
 
 def main(logroot):
     while True:
         log_export_start = str(round(time.time() * 1000) - 300000)
         log_export_stop = str(round(time.time() * 1000))
-        task_id = subprocess.check_output(['aws logs create-export-task --task-name export-to-s3-task --log-group-name API-Gateway-Execution-Logs_h6da3w6ume/production --from {0} --to {1} --destination api-honeypot-logs'.format(log_export_start, log_export_stop)], shell=True)
+        task_id = subprocess.check_output(['aws logs create-export-task --task-name export-to-s3-task --log-group-name {0} --from {1} --to {2} --destination api-honeypot-logs'.format(log_group_name, log_export_start, log_export_stop)], shell=True)
         cloudwatch_export_task_id = str(json.loads(task_id.decode('utf-8'))['taskId'])
-        subprocess.run(['aws', 's3', 'sync', 's3://api-honeypot-logs/exportedlogs/', logroot])
+        subprocess.run(['aws', 's3', 'sync', s3bucket, logroot])
         try:
             file_reader(logroot)
             #Important note: in the following line '*/*' represents the depth of recursive search. Adjust it according to your folder structure
@@ -171,13 +171,13 @@ def main(logroot):
                             result = http_method_and_path.split(",")[0]
                             if result == "DELETE":
                                 delete_epoch, delete_fields, delete_tags = delete_parser(filename)
-                                all_lines_processed.append(build_data_structure(delete_epoch, delete_fields, delete_tags, "honeypot"))
+                                all_lines_processed.append(build_data_structure(delete_epoch, delete_fields, delete_tags, db_name))
                             if "PUT" in line:
                                 put_epoch, put_fields, put_tags = put_parser(filename)
-                                all_lines_processed.append(build_data_structure(put_epoch, put_fields, put_tags, "honeypot"))
+                                all_lines_processed.append(build_data_structure(put_epoch, put_fields, put_tags, db_name))
                             if "GET" in line:
                                 get_epoch, get_fields, get_tags = get_parser(filename)
-                                all_lines_processed.append(build_data_structure(get_epoch, get_fields, get_tags, "honeypot"))
+                                all_lines_processed.append(build_data_structure(get_epoch, get_fields, get_tags, db_name))
             with open(db_json_file, 'w') as dbfile:
                 json.dump(all_lines_processed, dbfile)
             dbwriter(all_lines_processed)
