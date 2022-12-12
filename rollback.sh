@@ -3,7 +3,7 @@ export AWS_PROFILE=default
 
 account_id=391035843039
 region=us-east-1
-rest_api_id=z2m13enmwh
+rest_api_id=vchftnlugd
 
 # Remove DynamoDB table
 aws dynamodb delete-table --table-name cnTable
