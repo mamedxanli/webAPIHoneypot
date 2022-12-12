@@ -105,11 +105,11 @@ aws lambda create-function \
 sleep 3
 
 echo "Creating API Gateway"
-rest_api_id=$(aws apigateway create-rest-api --name 'testAPI' | jq -r '.id')
+rest_api_id=$(aws apigateway create-rest-api --region $region --name 'testAPI' | jq -r '.id')
 sleep 5
-parent_id=$(aws apigateway get-resources --rest-api-id $rest_api_id | jq -r '.items[].id')
+parent_id=$(aws apigateway get-resources --region $region --rest-api-id $rest_api_id | jq -r '.items[].id')
 aws apigateway create-resource --rest-api-id $rest_api_id --parent-id $parent_id --path-part $resource_name
-id_list=$(aws apigateway get-resources --rest-api-id $rest_api_id | jq -r '.items[] | .id')
+id_list=$(aws apigateway get-resources --region $region --rest-api-id $rest_api_id | jq -r '.items[] | .id')
 sleep 5
 
 for i in $id_list; do \
@@ -130,7 +130,7 @@ aws apigateway put-method \
 sleep 5
 
 #Getting GET Lambda function arn:
-get_arn=$(aws lambda get-function --function-name cnGetFunction | jq -r '.Configuration.FunctionArn')
+get_arn=$(aws lambda get-function --region $region --function-name cnGetFunction | jq -r '.Configuration.FunctionArn')
 echo "Setting integration request settings for GET method"
 aws apigateway put-integration \
 	--rest-api-id $rest_api_id \
@@ -175,7 +175,7 @@ aws apigateway put-method \
     --request-parameters '{"method.request.querystring.id":true, "method.request.querystring.City": true, "method.request.querystring.Model":true, "method.request.querystring.Output":true, "method.request.querystring.PostCode":true, "method.request.querystring.SN":true, "method.request.querystring.Street":true}'
 sleep 5
 
-put_arn=$(aws lambda get-function --function-name cnPutFunction | jq -r '.Configuration.FunctionArn')
+put_arn=$(aws lambda get-function --region $region --function-name cnPutFunction | jq -r '.Configuration.FunctionArn')
 echo "Updating integration request settings for PUT method"
 aws apigateway put-integration \
 	--rest-api-id $rest_api_id \
@@ -220,7 +220,7 @@ aws apigateway put-method \
     --request-parameters '{"method.request.querystring.id" : true}'
 sleep 5
 
-delete_arn=$(aws lambda get-function --function-name cnDeleteFunction | jq -r '.Configuration.FunctionArn')
+delete_arn=$(aws lambda get-function --region $region --function-name cnDeleteFunction | jq -r '.Configuration.FunctionArn')
 echo "Setting integration request settings for DELETE method"
 aws apigateway put-integration \
 	--rest-api-id $rest_api_id \
