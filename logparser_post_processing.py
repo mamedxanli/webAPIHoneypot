@@ -154,9 +154,9 @@ def dbwriter(data):
 
 
 def main(logroot):
-    #log_export_start = str(round(time.time() * 1000) - 300000)
-    #log_export_stop = str(round(time.time() * 1000))
-    task_id = subprocess.check_output(['aws logs create-export-task --region {0} --task-name export-to-s3-task --log-group-name {1} --destination api-honeypot-logs'.format(region,log_group_name,)], shell=True)
+    log_export_start = str(round(time.time() * 1000) - 2592000)
+    log_export_stop = str(round(time.time() * 1000))
+    task_id = subprocess.check_output(['aws logs create-export-task --region {0} --task-name export-to-s3-task --log-group-name {1} --from {2} --to {3} --destination api-honeypot-logs'.format(region,log_group_name,log_export_start,log_export_stop)], shell=True)
     cloudwatch_export_task_id = str(json.loads(task_id.decode('utf-8'))['taskId'])
     subprocess.run(['aws', 's3', 'sync', s3bucket, logroot])
     try:
