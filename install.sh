@@ -25,13 +25,14 @@ resource_name=chargers
 echo "Setting API resource name: " $resource_name
 
 account_id=391035843039
+echo "Setting account ID: " $account_id
+
 region=us-east-1
+echo "Setting your region: " $region
+
 first_arn=arn:aws:apigateway:$region:lambda:path/2015-03-31/functions
 
-echo "Setting account ID: " $account_id
-echo "Setting your region: " $region
 echo "Creating DynamoDB database"
-
 aws dynamodb create-table \
     --table-name cnTable \
     --region $region \
@@ -129,8 +130,8 @@ aws apigateway put-method \
         --request-parameters '{"method.request.querystring.id" : true}'
 sleep 5
 
-#Getting GET Lambda function arn:
 get_arn=$(aws lambda get-function --region $region --function-name cnGetFunction | jq -r '.Configuration.FunctionArn')
+
 echo "Setting integration request settings for GET method"
 aws apigateway put-integration \
 	--rest-api-id $rest_api_id \
@@ -176,6 +177,7 @@ aws apigateway put-method \
 sleep 5
 
 put_arn=$(aws lambda get-function --region $region --function-name cnPutFunction | jq -r '.Configuration.FunctionArn')
+
 echo "Updating integration request settings for PUT method"
 aws apigateway put-integration \
 	--rest-api-id $rest_api_id \
@@ -221,6 +223,7 @@ aws apigateway put-method \
 sleep 5
 
 delete_arn=$(aws lambda get-function --region $region --function-name cnDeleteFunction | jq -r '.Configuration.FunctionArn')
+
 echo "Setting integration request settings for DELETE method"
 aws apigateway put-integration \
 	--rest-api-id $rest_api_id \
@@ -292,6 +295,7 @@ aws apigateway create-deployment \
 	--stage-description "Production stage"
 sleep 5
 
+echo "Setting API stage"
 aws apigateway update-stage --rest-api-id $rest_api_id \
     --stage-name production \
     --region $region \
