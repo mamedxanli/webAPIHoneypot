@@ -4,10 +4,12 @@ import sys, os, glob, json, subprocess, gzip, time, logging
 from influxdb import client as influxdb
 
 # Setting Rest API ID
-rest-api-id = '86zjsyo8i1'
+rest_api_id = 'l0n7wx37ei'
 # Setting S3 bucket
 s3bucket = 's3://api-honeypot-logs/exportedlogs/'
-log_group_name = 'API-Gateway-Execution-Logs_{}/production'.format(rest-api-id)
+log_group_name = 'API-Gateway-Execution-Logs_{}/production'.format(rest_api_id)
+print(log_group_name)
+time.sleep(20)
 # Setting DB name
 db_name = 'honeypot'
 # Setting local json file name
