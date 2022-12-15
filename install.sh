@@ -4,30 +4,28 @@ It is assumed that you have AWS account with relevant permissions, and downloade
 For the simplicity in the test environment you can use AWS root account, although it is not recommended to use root account for production environment.
 
 Example ~/.aws/config file:
-[profile ntnu]
+[profile default]
 region = us-east-1
 output = json
 
 Example ~/.aws/credentials file:
-[ntnu]
+[default]
 aws_access_key_id = some_access_key_id
 aws_secret_access_key = some_access_key
 
 IMPORTANT! Do not run this script against AWS account, where you have other resources. 
 This code is a part of solution presented in a Master Thesis by Alakbar Mammadov at NTNU. 
-Create a separate AWS account for this experiment and make sure you do not have any important resources under that account.
-
-The following line exports credentials, making them avaiable for shell script, thus avoiding typing in region, aws_access_key_id, aws_secret_access_key in every command. '
+Create a separate AWS account for this experiment and make sure you do not have any important resources under that account. '
 
 export AWS_PROFILE=default
 
 resource_name=chargers
 echo "Setting API resource name: " $resource_name
 
-account_id=391035843039
+account_id=XXXXXXXXXXX #Add your AWS Account ID here
 echo "Setting account ID: " $account_id
 
-region=us-east-1
+region=us-east-1 #Add you region here
 echo "Setting your region: " $region
 
 first_arn=arn:aws:apigateway:$region:lambda:path/2015-03-31/functions

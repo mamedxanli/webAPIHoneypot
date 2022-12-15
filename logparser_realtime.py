@@ -3,7 +3,7 @@
 import sys, os, glob, json, subprocess, gzip, time, logging
 from influxdb import client as influxdb
 
-# Setting Rest API ID
+# Setting Rest API ID. Edit with relevant AWS API ID.
 rest_api_id = 'l0n7wx37ei'
 # Setting S3 bucket
 s3bucket = 's3://api-honeypot-logs/exportedlogs/'

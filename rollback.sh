@@ -1,9 +1,9 @@
 #!/bin/bash
 export AWS_PROFILE=default
 
-account_id=391035843039
+account_id=XXXXXXXXXXX #Edit with your AWS ACCOUNT ID
 region=us-east-1
-rest_api_id=93q5r8f7ac
+rest_api_id=93q5r8f7ac #Edit with relevant AWS API ID
 
 # Remove DynamoDB table
 aws dynamodb delete-table --table-name cnTable
